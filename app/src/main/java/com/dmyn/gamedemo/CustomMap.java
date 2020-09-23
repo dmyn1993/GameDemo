@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.dmyn.gamedemo.CreateRandomMap.Player;
 import com.dmyn.gamedemo.CreateRandomMap.Room;
 
 public class CustomMap extends View {
@@ -31,7 +32,9 @@ public class CustomMap extends View {
         int height = dm.heightPixels;
 
         Room rm = new Room(30, 30,8);
-        map = rm.roomMap;
+        Player p=new Player(rm.rd.map);
+        p.createPlayer();
+        map = rm.rd.map.gameMap;
         mapRow = map.length;
         mapCol = map[0].length;
         int t = mapRow > mapCol ? mapRow : mapCol;
@@ -39,11 +42,12 @@ public class CustomMap extends View {
         int s2 = (int) Math.floor((height - LR_margin) / t);
         tileSize = s1 < s2 ? s1 : s2;
 
-        pic = new Bitmap[7];
+        pic = new Bitmap[10];
         Resources r = this.getContext().getResources();
         loadPic(1, r.getDrawable(R.drawable.wall));
         loadPic(2, r.getDrawable(R.drawable.road));
         loadPic(3, r.getDrawable(R.drawable.box));
+        loadPic(9, r.getDrawable(R.drawable.man));
 
     }
 

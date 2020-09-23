@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Road {
-    public int mapHang;
-    public int mapLie;
-    public int[][] roadMap = null;
+    public Map map=null;
     private final static int roadFlag=1;
 
     /**
@@ -16,9 +14,7 @@ public class Road {
      * @param mapLie  地图有几竖列
      */
     public Road(int mapHang, int mapLie) {
-        this.mapHang = mapHang;
-        this.mapLie = mapLie;
-        this.roadMap = new int[this.mapHang][this.mapLie];
+        this.map=new Map(mapHang,mapLie);
         this.randomRoadStart();
     }
 
@@ -26,10 +22,10 @@ public class Road {
      * 随机道路起点
      */
     public void randomRoadStart() {
-        int xHang = (int) (Math.random() * ((this.mapHang) - 0) + 0);
-        int yLie = (int) (Math.random() * ((this.mapLie) - 0) + 0);
+        int xHang = (int) (Math.random() * ((this.map.mapHang) - 0) + 0);
+        int yLie = (int) (Math.random() * ((this.map.mapLie) - 0) + 0);
         // 设置道路起点
-        this.roadMap[xHang][yLie] = roadFlag;
+        this.map.gameMap[xHang][yLie] = roadFlag;
         // 传入起点位置，向下一个方向移动
         this.randomOrientationCreateRoad(xHang, yLie);
     }
@@ -83,10 +79,10 @@ public class Road {
     public boolean isAlive(int x, int y) {
         boolean alive = false;
         //（上第二格为空且x不等于1）或（下第二为空且x不等于地图行数-1）或（左第二为空且y不等于1）或（右第二为空且y不等于地图列数-1）
-        if ((this.roadMap[x - 2 < 0 ? 0 : x - 2][y] == 0 && x != 1)
-                || (this.roadMap[x + 2 >= this.mapHang - 1 ? this.mapHang - 1 : x + 2][y] == 0 && x != this.mapHang - 2)
-                || (this.roadMap[x][y - 2 < 0 ? 0 : y - 2] == 0 && y != 1)
-                || (this.roadMap[x][y + 2 >= this.mapLie - 1 ? this.mapLie - 1 : y + 2] == 0 && y != this.mapLie - 2)) {
+        if ((this.map.gameMap[x - 2 < 0 ? 0 : x - 2][y] == 0 && x != 1)
+                || (this.map.gameMap[x + 2 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 2][y] == 0 && x != this.map.mapHang - 2)
+                || (this.map.gameMap[x][y - 2 < 0 ? 0 : y - 2] == 0 && y != 1)
+                || (this.map.gameMap[x][y + 2 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 2] == 0 && y != this.map.mapLie - 2)) {
             alive = true;
         }
         return alive;
@@ -104,54 +100,54 @@ public class Road {
         int[] xy = new int[3];
         if (orientation == 0) {
             //上第一格为空
-            if (this.roadMap[x - 1 < 0 ? 0 : x - 1][y] == 0) {
+            if (this.map.gameMap[x - 1 < 0 ? 0 : x - 1][y] == 0) {
                 //上第二格为空
-                if (this.roadMap[x - 2 < 0 ? 0 : x - 2][y] == 0) {
+                if (this.map.gameMap[x - 2 < 0 ? 0 : x - 2][y] == 0) {
                     //x向上移动一格后和向上移动两格后是否为同一个位置，用来判断x是否处于地图边缘或地图边缘-1的位置
                     if ((x - 1 < 0 ? 0 : x - 1) != (x - 2 < 0 ? 0 : x - 2)) {
                         //x向上移动一格
                         x = x - 1 < 0 ? 0 : x - 1;
-                        this.roadMap[x][y] = roadFlag;
+                        this.map.gameMap[x][y] = roadFlag;
                         //x再向上移动一格
                         x = x - 1 < 0 ? 0 : x - 1;
-                        this.roadMap[x][y] = roadFlag;
+                        this.map.gameMap[x][y] = roadFlag;
                         //当前方法的返回值下标2设为1，代表移动成功
                         xy[2] = 1;
                     }
                 }
             }
         } else if (orientation == 1) {
-            if (this.roadMap[x + 1 >= this.mapHang - 1 ? this.mapHang - 1 : x + 1][y] == 0) {
-                if (this.roadMap[x + 2 >= this.mapHang - 1 ? this.mapHang - 1 : x + 2][y] == 0) {
-                    if ((x + 1 >= this.mapHang - 1 ? this.mapHang - 1 : x + 1) != (x + 2 >= this.mapHang - 1 ? this.mapHang - 1 : x + 2)) {
-                        x = x + 1 >= this.mapHang - 1 ? this.mapHang - 1 : x + 1;
-                        this.roadMap[x][y] = roadFlag;
-                        x = x + 1 >= this.mapHang - 1 ? this.mapHang - 1 : x + 1;
-                        this.roadMap[x][y] = roadFlag;
+            if (this.map.gameMap[x + 1 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 1][y] == 0) {
+                if (this.map.gameMap[x + 2 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 2][y] == 0) {
+                    if ((x + 1 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 1) != (x + 2 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 2)) {
+                        x = x + 1 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 1;
+                        this.map.gameMap[x][y] = roadFlag;
+                        x = x + 1 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : x + 1;
+                        this.map.gameMap[x][y] = roadFlag;
                         xy[2] = 1;
                     }
                 }
             }
         } else if (orientation == 2) {
-            if (this.roadMap[x][y - 1 < 0 ? 0 : y - 1] == 0) {
-                if (this.roadMap[x][y - 2 < 0 ? 0 : y - 2] == 0) {
+            if (this.map.gameMap[x][y - 1 < 0 ? 0 : y - 1] == 0) {
+                if (this.map.gameMap[x][y - 2 < 0 ? 0 : y - 2] == 0) {
                     if ((y - 1 < 0 ? 0 : y - 1) != (y - 2 < 0 ? 0 : y - 2)) {
                         y = y - 1 < 0 ? 0 : y - 1;
-                        this.roadMap[x][y] = roadFlag;
+                        this.map.gameMap[x][y] = roadFlag;
                         y = y - 1 < 0 ? 0 : y - 1;
-                        this.roadMap[x][y] = roadFlag;
+                        this.map.gameMap[x][y] = roadFlag;
                         xy[2] = 1;
                     }
                 }
             }
         } else if (orientation == 3) {
-            if (this.roadMap[x][y + 1 >= this.mapLie - 1 ? this.mapLie - 1 : y + 1] == 0) {
-                if (this.roadMap[x][y + 2 >= this.mapLie - 1 ? this.mapLie - 1 : y + 2] == 0) {
-                    if ((y + 1 >= this.mapLie - 1 ? this.mapLie - 1 : y + 1) != (y + 2 >= this.mapLie - 1 ? this.mapLie - 1 : y + 2)) {
-                        y = y + 1 >= this.mapLie - 1 ? this.mapLie - 1 : y + 1;
-                        this.roadMap[x][y] = roadFlag;
-                        y = y + 1 >= this.mapLie - 1 ? this.mapLie - 1 : y + 1;
-                        this.roadMap[x][y] = roadFlag;
+            if (this.map.gameMap[x][y + 1 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 1] == 0) {
+                if (this.map.gameMap[x][y + 2 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 2] == 0) {
+                    if ((y + 1 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 1) != (y + 2 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 2)) {
+                        y = y + 1 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 1;
+                        this.map.gameMap[x][y] = roadFlag;
+                        y = y + 1 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : y + 1;
+                        this.map.gameMap[x][y] = roadFlag;
                         xy[2] = 1;
                     }
                 }
