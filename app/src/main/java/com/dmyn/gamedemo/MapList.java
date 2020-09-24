@@ -1,7 +1,7 @@
 package com.dmyn.gamedemo;
 
 public class MapList {
-    static int map[][][]= {
+    static int map[][][] = {
             {
                     {0, 0, 1, 1, 1, 0, 0, 0},
                     {0, 0, 1, 2, 1, 0, 0, 0},
@@ -44,26 +44,27 @@ public class MapList {
                     {1, 1, 1, 1, 1, 1}
             }
     };
-    static int count=map.length;
-    public static int [] [] getMap(int grade){
-        int temp[] [];
-        if(grade>=0&&grade<count){
-            temp=map[grade];
-        }else{
-            temp=map[0];
+    static int count = map.length;
+
+    public static int[][] getMap(int grade) {
+        int temp[][];
+        if (grade >= 0 && grade < count) {
+            temp = map[grade];
+        } else {
+            temp = map[0];
         }
-        int row=temp.length;
-        int col=temp[0].length;
-        int [] [] result=new int[row][col];
-        for(int i=0;i<row;i++){
-            for(int j=0;j<col;j++){
-                result[i][j]=temp[i][j];
+        int row = temp.length;
+        int col = temp[0].length;
+        int[][] result = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                result[i][j] = temp[i][j];
             }
         }
         return result;
     }
 
-    public static int getCount(){
+    public static int getCount() {
         return count;
     }
 }

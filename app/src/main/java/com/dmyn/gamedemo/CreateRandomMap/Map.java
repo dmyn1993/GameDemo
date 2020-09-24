@@ -44,9 +44,9 @@ public class Map {
             for (int j = 0; j < this.listMap.get(i).size(); j++) {
                 tmpArrayMapHang[j] = this.listMap.get(i).get(j);
             }
-            tmpArrayMap[i]=tmpArrayMapHang;
+            tmpArrayMap[i] = tmpArrayMapHang;
         }
-        this.gameMap=tmpArrayMap;
+        this.gameMap = tmpArrayMap;
     }
 
 }

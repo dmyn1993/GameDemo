@@ -56,7 +56,7 @@ public class Room {
         int roomLie = (int) (Math.random()
                 * (((this.rd.map.mapLie - yLie > maxRS ? maxRS : this.rd.map.mapLie - yLie) + 1) - minRS) + minRS);
 //		System.out.println("xHang="+xHang+", yLie="+yLie+", roomHang="+roomHang+", roomLie="+roomLie);    //打印房间坐标和大小
-        int[] rps = { xHang, yLie, roomHang, roomLie };
+        int[] rps = {xHang, yLie, roomHang, roomLie};
         return rps;
     }
 

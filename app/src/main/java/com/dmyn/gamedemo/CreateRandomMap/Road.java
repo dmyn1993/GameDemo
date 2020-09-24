@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Road {
-    public Map map=null;
-    private final static int roadFlag=1;
+    public Map map = null;
+    private final static int roadFlag = 1;
 
     /**
      * 实例化对象时需指定地图大小
@@ -14,7 +14,7 @@ public class Road {
      * @param mapLie  地图有几竖列
      */
     public Road(int mapHang, int mapLie) {
-        this.map=new Map(mapHang,mapLie);
+        this.map = new Map(mapHang, mapLie);
         this.randomRoadStart();
     }
 
@@ -51,7 +51,7 @@ public class Road {
                 if (xy[2] == 1) {
                     x = xy[0];
                     y = xy[1];
-                    int[] movedXY = { x, y };
+                    int[] movedXY = {x, y};
                     // 把移动后的坐标存入道路坐标集合
                     roadXY.add(movedXY);
                 }

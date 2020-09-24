@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".about">
+    tools:context=".about"
+    android:id="@+id/about">
 
 <!--        <com.dmyn.gamedemo.YView-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:layout_gravity="center" />-->
 
-    <com.dmyn.gamedemo.CustomMap
-        android:id="@+id/cm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+<!--    <com.dmyn.gamedemo.CustomMap-->
+<!--        android:id="@+id/cm"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerHorizontal="true" />-->
 
     <Button
         android:id="@+id/down"
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="↓" />
+        android:text="↓"
+        android:onClick="onClick"/>
 
     <LinearLayout
         android:id="@+id/LR"
@@ -37,13 +39,15 @@
             android:id="@+id/left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="←" />
+            android:text="←"
+            android:onClick="onClick"/>
 
         <Button
             android:id="@+id/right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="→" />
+            android:text="→"
+            android:onClick="onClick"/>
 
     </LinearLayout>
 
@@ -53,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/LR"
         android:layout_centerHorizontal="true"
-        android:text="↑" />
+        android:text="↑"
+        android:onClick="onClick"/>
 
 </RelativeLayout>

@@ -82,9 +82,9 @@ public class YView extends View {
             case MeasureSpec.AT_MOST:
                 defaultWidth = (int) mPaint.measureText(mText) + getPaddingLeft() + getPaddingRight();
                 Log.e("YViewWidth", "speMode = AT_MOST");
-                Log.e("YViewWidth","measureText()="+ mPaint.measureText(mText));
-                Log.e("YViewWidth","getPaddingLeft()="+getPaddingLeft());
-                Log.e("YViewWidth","getPaddingRight()="+getPaddingRight());
+                Log.e("YViewWidth", "measureText()=" + mPaint.measureText(mText));
+                Log.e("YViewWidth", "getPaddingLeft()=" + getPaddingLeft());
+                Log.e("YViewWidth", "getPaddingRight()=" + getPaddingRight());
                 break;
             case MeasureSpec.EXACTLY:
                 Log.e("YViewWidth", "speMode = EXACTLY");
