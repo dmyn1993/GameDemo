@@ -1,5 +1,7 @@
 package com.dmyn.gamedemo.CreateRandomMap;
 
+import android.util.Log;
+
 public class Player {
     public Map map = null;
     public int playerXHang;
@@ -15,7 +17,7 @@ public class Player {
         while (true) {
             int pXHang = (int) (Math.random() * ((this.map.mapHang) - 0) + 0);
             int pYLie = (int) (Math.random() * ((this.map.mapLie) - 0) + 0);
-            if (this.map.gameMap[pXHang][pYLie] == 1 || this.map.gameMap[pXHang][pYLie] == 2) {
+            if (this.map.gameMap[pXHang][pYLie] != 0 && this.map.gameMap[pXHang][pYLie] != 3) {
                 this.playerXHang = pXHang;
                 this.playerYLie = pYLie;
                 this.playerFloor = this.map.gameMap[pXHang][pYLie];
@@ -27,24 +29,50 @@ public class Player {
 
     public void up() {
         int newXH = this.playerXHang - 1 < 0 ? 0 : this.playerXHang - 1;
-        if (this.map.gameMap[newXH][this.playerYLie] == 1 || this.map.gameMap[newXH][this.playerYLie] == 2) {
+        Log.e("dmyn", "xh=" + newXH + ", yl=" + this.playerYLie + ", new=" + this.map.gameMap[newXH][this.playerYLie]);
+        if (this.map.gameMap[newXH][this.playerYLie] != 0 && this.map.gameMap[newXH][this.playerYLie] != 3 && this.map.gameMap[newXH][this.playerYLie] != playerFlag) {
             int tempPlayerFloor = this.map.gameMap[newXH][this.playerYLie];
             this.map.gameMap[newXH][this.playerYLie] = playerFlag;
             this.map.gameMap[this.playerXHang][this.playerYLie] = this.playerFloor;
             this.playerFloor = tempPlayerFloor;
+            this.playerXHang = newXH;
         }
     }
 
     public void down() {
-
+        int newXH = this.playerXHang + 1 >= this.map.mapHang - 1 ? this.map.mapHang - 1 : this.playerXHang + 1;
+        Log.e("dmyn", "xh=" + newXH + ", yl=" + this.playerYLie + ", new=" + this.map.gameMap[newXH][this.playerYLie]);
+        if (this.map.gameMap[newXH][this.playerYLie] != 0 && this.map.gameMap[newXH][this.playerYLie] != playerFlag) {
+            int tempPlayerFloor = this.map.gameMap[newXH][this.playerYLie];
+            this.map.gameMap[newXH][this.playerYLie] = playerFlag;
+            this.map.gameMap[this.playerXHang][this.playerYLie] = this.playerFloor;
+            this.playerFloor = tempPlayerFloor;
+            this.playerXHang = newXH;
+        }
     }
 
     public void left() {
-
+        int newYL = this.playerYLie - 1 < 0 ? 0 : this.playerYLie - 1;
+        Log.e("dmyn", "xh=" + this.playerXHang + ", yl=" + newYL + ", new=" + this.map.gameMap[this.playerXHang][newYL]);
+        if (this.map.gameMap[this.playerXHang][newYL] != 0 && this.map.gameMap[this.playerXHang][newYL] != 3 && this.map.gameMap[this.playerXHang][newYL] != playerFlag) {
+            int tempPlayerFloor = this.map.gameMap[this.playerXHang][newYL];
+            this.map.gameMap[this.playerXHang][newYL] = playerFlag;
+            this.map.gameMap[this.playerXHang][this.playerYLie] = this.playerFloor;
+            this.playerFloor = tempPlayerFloor;
+            this.playerYLie = newYL;
+        }
     }
 
     public void right() {
-
+        int newYL = this.playerYLie + 1 >= this.map.mapLie - 1 ? this.map.mapLie - 1 : this.playerYLie + 1;
+        Log.e("dmyn", "xh=" + this.playerXHang + ", yl=" + newYL + ", new=" + this.map.gameMap[this.playerXHang][newYL]);
+        if (this.map.gameMap[this.playerXHang][newYL] != 0 && this.map.gameMap[this.playerXHang][newYL] != playerFlag) {
+            int tempPlayerFloor = this.map.gameMap[this.playerXHang][newYL];
+            this.map.gameMap[this.playerXHang][newYL] = playerFlag;
+            this.map.gameMap[this.playerXHang][this.playerYLie] = this.playerFloor;
+            this.playerFloor = tempPlayerFloor;
+            this.playerYLie = newYL;
+        }
     }
 
 }
